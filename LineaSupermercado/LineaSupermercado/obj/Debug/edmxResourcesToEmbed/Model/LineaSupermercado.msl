@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="LineaSupermercadoModelStoreContainer" CdmEntityContainer="LineaSupermercadoEntities">
+    <EntitySetMapping Name="Caja">
+      <EntityTypeMapping TypeName="LineaSupermercadoModel.Caja">
+        <MappingFragment StoreEntitySet="Caja">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="NumeroCaja" ColumnName="NumeroCaja" />
+          <ScalarProperty Name="Cajero" ColumnName="Cajero" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CajaCliente">
+      <EntityTypeMapping TypeName="LineaSupermercadoModel.CajaCliente">
+        <MappingFragment StoreEntitySet="CajaCliente">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="IDCaja" ColumnName="IDCaja" />
+          <ScalarProperty Name="IDCliente" ColumnName="IDCliente" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cliente">
+      <EntityTypeMapping TypeName="LineaSupermercadoModel.Cliente">
+        <MappingFragment StoreEntitySet="Cliente">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

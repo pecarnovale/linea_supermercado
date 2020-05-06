@@ -1,0 +1,2 @@
+1-Se puede restaurar la base de datos con el archivo LineaSupermercado.bak
+2-En la carpeta scripts se encuentra separado por objeto cada script de creacion, ademas incluye datos de ejemplo

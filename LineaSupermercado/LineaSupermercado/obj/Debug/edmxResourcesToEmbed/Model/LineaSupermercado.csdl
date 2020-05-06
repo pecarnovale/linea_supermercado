@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="LineaSupermercadoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Caja">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NumeroCaja" Type="Int32" Nullable="false" />
+    <Property Name="Cajero" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="CajaCliente" Relationship="Self.FK_CajaCliente_Caja" FromRole="Caja" ToRole="CajaCliente" />
+  </EntityType>
+  <EntityType Name="CajaCliente">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="IDCaja" Type="Int32" />
+    <Property Name="IDCliente" Type="Int32" />
+    <NavigationProperty Name="Caja" Relationship="Self.FK_CajaCliente_Caja" FromRole="CajaCliente" ToRole="Caja" />
+    <NavigationProperty Name="Cliente" Relationship="Self.FK_CajaCliente_Cliente" FromRole="CajaCliente" ToRole="Cliente" />
+  </EntityType>
+  <EntityType Name="Cliente">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+    <Property Name="Apellido" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="CajaCliente" Relationship="Self.FK_CajaCliente_Cliente" FromRole="Cliente" ToRole="CajaCliente" />
+  </EntityType>
+  <Association Name="FK_CajaCliente_Caja">
+    <End Role="Caja" Type="Self.Caja" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="CajaCliente" Type="Self.CajaCliente" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Caja">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CajaCliente">
+        <PropertyRef Name="IDCaja" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CajaCliente_Cliente">
+    <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="CajaCliente" Type="Self.CajaCliente" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cliente">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CajaCliente">
+        <PropertyRef Name="IDCliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="LineaSupermercadoEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Caja" EntityType="Self.Caja" />
+    <EntitySet Name="CajaCliente" EntityType="Self.CajaCliente" />
+    <EntitySet Name="Cliente" EntityType="Self.Cliente" />
+    <AssociationSet Name="FK_CajaCliente_Caja" Association="Self.FK_CajaCliente_Caja">
+      <End Role="Caja" EntitySet="Caja" />
+      <End Role="CajaCliente" EntitySet="CajaCliente" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CajaCliente_Cliente" Association="Self.FK_CajaCliente_Cliente">
+      <End Role="Cliente" EntitySet="Cliente" />
+      <End Role="CajaCliente" EntitySet="CajaCliente" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

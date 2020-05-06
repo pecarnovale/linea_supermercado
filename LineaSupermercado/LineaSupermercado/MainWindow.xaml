@@ -1,0 +1,107 @@
+﻿<Window x:Class="LineaSupermercado.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Linea de Supermercado" Height="500" Width="1200" HorizontalAlignment="Center" VerticalAlignment="Center" Icon="AppIcon.png">
+
+    <Window.Resources>
+        <!-- DataGrid style -->
+        <Style x:Key="DataGridStyle1" TargetType="{x:Type DataGrid}">
+            <Setter Property="ColumnHeaderStyle" Value="{DynamicResource ColumnHeaderStyle1}"/>
+        </Style>
+        <!-- DataGridColumnHeader style -->
+        <Style x:Key="ColumnHeaderStyle1" TargetType="DataGridColumnHeader">
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="Background" Value="#FFB1D1F0"/>
+            <Setter Property="Foreground" Value="#333"/>
+            <Setter Property="FontSize" Value="14" />
+        </Style>
+    </Window.Resources>
+    <Grid >
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="90*" />
+            <RowDefinition Height="10*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+
+        <DataGrid Style="{DynamicResource DataGridStyle1}"
+        Name="dgCajas"
+        AlternatingRowBackground="#dadada"
+                
+        AutoGenerateColumns="False"
+        Background="#FFF"
+        CanUserAddRows="False"
+        CanUserResizeColumns="True"
+        ColumnHeaderHeight="30"
+        DataContext="{Binding}"
+        FontSize="13"
+        Foreground="Gray"
+                RowHeight="25"
+             
+        ItemsSource="{Binding}" RowBackground="White" BorderBrush="#FFB1D1F0" HorizontalGridLinesBrush="#FFF" VerticalGridLinesBrush="#FFF"  >
+            <DataGrid.Columns>
+                <DataGridTextColumn
+                Width="1*"
+                Binding="{Binding NumeroCaja }"
+                Header="Numero de Caja"
+                IsReadOnly="True"
+                    Visibility="Visible" />
+                <DataGridTextColumn
+                Width="1*"
+                Binding="{Binding Cajero}"
+                Header="Nombre del Cajero"
+                IsReadOnly="True"
+                Visibility="Visible" />
+                <DataGridTextColumn
+                Width="1*"
+                Binding="{Binding ClientesPorAtender}"
+                Header="Clientes por Antender"
+                IsReadOnly="True"
+                Visibility="Visible" />
+                <DataGridTextColumn
+                Width="1*"
+                Binding="{Binding ClientesAtendidos}"
+                Header="Clientes Atendidos"
+                IsReadOnly="True"
+                Visibility="Visible" />
+
+                <DataGridTextColumn
+                Width="1*"
+                Binding="{Binding ProgramPath}"
+                Header=""
+                IsReadOnly="True"
+                Visibility="Visible" />
+                <DataGridTemplateColumn Header="" Width="1*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button
+                            x:Name="btnCerrarCaja"
+                            Width="150"
+                            Height="Auto"
+                            Content="CerrarCaja" Click="btnCerrarCaja_Click"  />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="" Width="1*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button
+                            x:Name="btnAtenderCliente"
+                            Width="150"
+                            Height="Auto"
+                            Content="Atender Cliente" Click="btnAtenderCliente_Click" IsEnabled="{Binding Path = ClientesPorAtender}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <WrapPanel Orientation="Horizontal"  Grid.Row="1"  HorizontalAlignment="Center"   >
+            <Button Content="Abrir Caja"  Click="btnAgregarCaja_Click" Height="46" Width="77" Background="#FF4489CF" BorderBrush="#FF1F2F51" Foreground="White"/>
+            <Button Content="Agregar Cliente"  Click="btnAgregarCliente_Click" Height="46" Background="#FF4489CF" Foreground="#FFF7F7F7" Width="99"/>
+        </WrapPanel>
+
+    </Grid>
+
+</Window>
